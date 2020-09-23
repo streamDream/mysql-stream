@@ -11,6 +11,8 @@
      
 * 目前测试过的Python版本为3.6，MySQL服务器版本为5.6
 
+## 安装方法
+    pip install mysql-stream
 
 ## 依赖
 ```
