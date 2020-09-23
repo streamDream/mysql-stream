@@ -175,10 +175,10 @@ class Model(dict, metaclass=ModelMetaclass):  # 继承自 dict ！！！
         if limit is not None:
             sql_elements.append('limit')
             if isinstance(limit, int):
-                sql_elements.append('?')
+                sql_elements.append('%s')
                 args.append(limit)
             elif isinstance(limit, tuple) and len(limit) == 2:
-                sql_elements.append('?, ?')
+                sql_elements.append('%s, %s')
                 args.extend(limit)
             else:
                 raise ValueError(f"limit:{limit} is incorrect !")
