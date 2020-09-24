@@ -9,12 +9,13 @@
 
    -  常见的query和execute
    -  特色功能是封装了transaction功能
+   -  使用方法见test目录下的client\_demo.py
 
 -  ORM工具类包括：
 
    -  仅支持针对单个表的CURD操作，暂不支持多表联合的操作
    -  查询操作支持order by，limit等语法
-   -  使用方法见test目录下的test\_models.py
+   -  使用方法见test目录下的orm\_demo.py
 
 -  目前测试过的Python版本为3.6，MySQL服务器版本为5.6
 
