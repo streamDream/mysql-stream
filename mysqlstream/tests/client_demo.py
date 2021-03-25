@@ -28,7 +28,7 @@ class ClientDemo:
     """
 
     def __init__(self):
-        self.table = 'chong.t_user'
+        self.table = 'mysqlstream.t_user'
         self.now = self._now()
 
     @staticmethod

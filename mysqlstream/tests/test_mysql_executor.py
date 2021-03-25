@@ -14,7 +14,7 @@ class TestMysqlExecutor(unittest.TestCase):
         MySqlDBPool.init_pool(1, 4, **TestConfig.cfg_for_mysql_db_pool())
 
     def setUp(self) -> None:
-        self.table = 'chong.t_user'
+        self.table = 'mysqlstream.t_user'
         self.now = self._now()
 
     @staticmethod

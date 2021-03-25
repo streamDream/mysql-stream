@@ -8,7 +8,7 @@ from mysqlstream.mysql_db_pool import MySqlDBPool
 
 
 class User(Model):
-    __table__ = 'chong.t_user'
+    __table__ = 'mysqlstream.t_user'
 
     id = IntegerType('id', primary_key=True)
     name = StringType('name', default='')

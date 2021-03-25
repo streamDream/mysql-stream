@@ -10,13 +10,16 @@ class MysqlExecutor:
     @classmethod
     def _execute_query(cls, sql, args, fetchone=False):
         with MySqlDBPool() as connection:
-            with connection.cursor() as cursor:
+            try:
+                cursor = connection.cursor()
                 cursor.execute(sql, args)
                 if fetchone:
                     rows = cursor.fetchone()
                 else:
                     rows = cursor.fetchall()
                 return rows
+            finally:
+                cursor.close()
 
     @classmethod
     def query_one_row(cls, sql, args):
@@ -67,10 +70,13 @@ class MysqlExecutor:
             raise ValueError('sql is empty!')
 
         with MySqlDBPool() as connection:
-            with connection.cursor() as cursor:
+            try:
+                cursor = connection.cursor()
                 affected = cursor.execute(sql, args)
                 connection.commit()
                 return affected, cursor.lastrowid
+            finally:
+                cursor.close()
 
     @classmethod
     def transaction_execute(cls, sql_list, args_list, rollback=True):
@@ -85,12 +91,15 @@ class MysqlExecutor:
         try:
             with MySqlDBPool() as connection:
                 connection.begin()
-                with connection.cursor() as cursor:
+                try:
+                    cursor = connection.cursor()
                     for i, sql in enumerate(sql_list):
                         if args_list:
                             cursor.execute(sql, args_list[i])
                         else:
                             cursor.execute(sql)
+                finally:
+                    cursor.close()
                 connection.commit()
         except Exception as e:
             if rollback:
@@ -107,8 +116,11 @@ class MysqlExecutor:
         :rtype str:
         """
         with MySqlDBPool() as connection:
-            with connection.cursor() as cursor:
+            try:
+                cursor = connection.cursor()
                 return cursor.mogrify(sql, args)
+            finally:
+                cursor.close()
 
     def start_transaction(self):
         """

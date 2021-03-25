@@ -1,6 +1,9 @@
 # brief: DB的链接池
 import pymysql
-from DBUtils.PooledDB import PooledDB
+try:
+    from DBUtils.PooledDB import PooledDB
+except:
+    from dbutils.pooled_db import PooledDB
 
 
 class MySqlDBPool:
