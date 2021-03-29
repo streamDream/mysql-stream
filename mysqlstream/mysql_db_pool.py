@@ -51,14 +51,14 @@ class MySqlDBPool:
         """
         回收连接
         """
-        self._pool.cache(self._connection)
+        self._connection.close()
 
     def __enter__(self):
-        connections = self._pool._connections
+        # connections = self._pool._connections
         # print('>>>> MysqlDBPool enter, connections:', connections)
         return self.get_connection()
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        connections = self._pool._connections
+        # connections = self._pool._connections
         # print('>>>> MysqlDBPool exit, connections:', connections)
-        self.recycle_connection()
+        self._connection.close()
